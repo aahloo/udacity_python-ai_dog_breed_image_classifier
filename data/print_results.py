@@ -70,7 +70,7 @@ def print_results(results_dic, results_stats_dic, model, print_incorrect_dogs = 
         #
         if key[0] == 'p': # all percentages in results_stats_dic have keys starting with 'p'
             # print both the key and the value; remember the value is accessed by results_stats_dic[key]
-            print(key, ": ", results_stats_dic[key], 1, "%")           
+            print(key, ": ", results_stats_dic[key], 1)           
 
     # IF print_incorrect_dogs == True AND there were images incorrectly 
     # classified as dogs or vice versa - print out these cases
