@@ -47,26 +47,35 @@ def get_pet_labels(image_dir):
 
     # Processes through each file in the directory, extracting only the words
     # of the file that contain the pet image label
-    for file in in_files:
+    for idx in range(0, len(in_files), 1):
            
         # Skips file if starts with . (like .DS_Store of Mac OSX) because it 
         # isn't an pet image file
-        if file[0] != ".":
+        if in_files[idx][0] != ".":
+           
+            # Creates temporary label variable to hold pet label name extracted 
+            pet_label = ""
 
             ## process each filename in the in_files list to extract the dog breed name from the filename
-           
-            # create and set label var to hold pet label extracted, then set values with only lowercase letters
-            # and split words separated by underscore
-            pet_pic = file.lower().split("_")
-            pet_label = " ".join([name.strip() for name in pet_pic if name.isalpha()])           
-               
-            # If filename doesn't already exist in dictionary add it and its  pet label - 
-            # otherwise print an error message because indicates duplicate files (filenames)
-            if file not in results_dic:
-                results_dic[file] = [pet_label]
-                    
-            else:
-                print("** Warning: Duplicate files exist in directory:", file)  
+
+            # sets values with only lower case letters and splits into words separated by underscore
+            pet_pic = in_files[idx].lower().split("_") 
+            
+            for name in pet_pic:
+                # validate name is alpha chars only
+                if name.isalpha(): 
+                    pet_label += name + " " # separated by spaces
+
+            # then, strip off any whitespace characters beginning and end of label
+            pet_label = pet_label.strip()
+
+        # If filename doesn't already exist in dictionary add it and it's  pet label - 
+        # otherwise print an error message because indicates duplicate files (filenames)
+        if in_files[idx] not in results_dic:
+            results_dic[in_files[idx]] = [pet_label]
+              
+        else:
+            print("** Warning: Duplicate files exist in directory:", in_files[idx])  
       
 
     # Replace None with the results_dic dictionary that you created with this function
